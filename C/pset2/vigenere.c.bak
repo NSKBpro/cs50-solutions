@@ -1,0 +1,85 @@
+#include <stdio.h>
+#include <cs50.h>
+#include <string.h>
+#include <stdlib.h>
+#include <ctype.h>
+
+//FUNCTIONS
+string getUserInput();
+void getCipherText(string input, string cipher);
+
+int main(int argc, char **argv){
+    if(argc != 2){ 
+             printf("ERROR: you must pass argument!\nUsage: ./vigenere cipher\n");
+             return 1;
+    } else if (argc == 2) {
+        for(int i=0,len=strlen(argv[1])-1;i<len;i++){
+                if(!isalpha(argv[1][i])){
+                    printf("ERROR: Argument must be string!\nUsage: ./vigenere cipher\n");
+                    return 1;
+                }
+            }
+    }
+    printf("plaintext:");
+    string tmp = getUserInput();
+    getCipherText(tmp,argv[1]);
+    printf("\n");
+    return 0;
+}
+
+string getUserInput(){
+    string input;
+    do{
+        input = get_string();
+    }while(input==NULL);
+    return input;
+}
+
+void getCipherText(string input, string cipher){
+    char outputCipher[strlen(input)]; // Memory for new ciphertext 
+    int cipherCounter = 0;
+    int cipherLength = strlen(cipher)-1;
+    printf("ciphertext:");
+    for(int i =0,length=strlen(input);i<length;i++){
+        if(isalpha(input[i])){ //Checks if current character is alphabetic
+            //int currentCipherAlphabetic = (isupper(cipher[cipherCounter]))?(cipher[cipherCounter]%65):(cipher[cipherCounter]%97);
+            int currentCipherAlphabetic = (toupper(cipher[cipherCounter])-65)%26;
+            int cipherAsciiValue = input[i] + currentCipherAlphabetic; //Adds cipher to current character
+            if(cipherCounter < cipherLength){
+                cipherCounter++;
+            }else{
+                cipherCounter = 0;
+            }
+            if(!isalpha(cipherAsciiValue)){ //If current cipher character is now not valid alphabetic character
+                if(isupper(input[i])){
+                    int caesarCharacter = (cipherAsciiValue-65)%26; //Get alphabetic index of character
+                    outputCipher[i] = caesarCharacter+65; //Convert back to ASCII
+                }else{
+                    int caesarCharacter = (cipherAsciiValue-97)%26; //Get alphabetic index of character
+                    outputCipher[i] = caesarCharacter+97; //Convert back to ASCII
+                    
+                }
+            }else
+            outputCipher[i] = cipherAsciiValue; // If current cipher character is still valid alphabetic character
+             //printf("%c",outputCipher[i]);
+             if(isupper(input[i]) && outputCipher[i] > 90){
+                 if(currentCipherAlphabetic==25){
+                    currentCipherAlphabetic = input[i] - 66;
+                    outputCipher[i] = 65 + currentCipherAlphabetic;
+                 }else
+                    outputCipher[i] = 65 + currentCipherAlphabetic;
+                
+             }else if (islower(input[i]) && outputCipher[i] < 97){
+               if(currentCipherAlphabetic==25){
+                    currentCipherAlphabetic = input[i] - 98;
+                    outputCipher[i] = 97 + currentCipherAlphabetic;
+                 }else
+                    outputCipher[i] = 97 + currentCipherAlphabetic;
+             }
+        }else
+        outputCipher[i] = input[i]; // If current character was not alphabetic character, just clone it to new string (symbols, numbers, ..)
+        
+        printf("%c",outputCipher[i]);
+    }
+   // printf("ciphertext:%s",outputCipher);
+}

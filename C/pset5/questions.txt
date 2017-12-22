@@ -1,0 +1,24 @@
+0.  Pneumonoultramicroscopicsilicovolcanoconiosis is English word that refers to a lung disease that is otherwise known as silicosis. 
+    It is the longest word in the English language published in a dictionary, the Oxford English Dictionary,
+    which defines it as "an artificial long word said to mean a lung disease caused by inhaling very fine ash and sand dust."
+
+1.  getrusage()  returns  resource usage measures for who, which can be one of the following :
+    * RUSAGE_SELF - Return resource usage statistics for the calling process,  which is the sum of resources used by all threads in the process.
+    * RUSAGE_CHILDREN - Return resource usage statistics for all children of the calling process that have terminated and been waiting for.
+    * RUSAGE_THREAD - Return resource usage statistics for the calling thread.   
+    
+2.  16
+
+3.  Before and after are passed to getrusage to determine the resource use at the point in time before and after the event that we want to measure. 
+    This allows the program to then use the calculate function to determine the contribution of the event to resource usage and time consumed by the event's process.
+    
+4.  For loop initializes char c as first character from file pointer, it checks if that character is not equal to EOF, on end of instrucitons c calls fgetc again to get next character. 
+    The characters are filtered so that they are alphanumeric or apostrophes, and to filter out spaces and line breaks and so on. 
+    The characters are used to constitute words that are shorter than the max length. 
+    The rest of the loop goes into checking each word against the dictionary.
+
+5.  Fgetc provides much more control over what characters are allowed to filter through to the constituted string. 
+    Usign a string by string reading function, such as fscanf would introduce problems where the string may contain undesirable characters, and need to be subsequently corrected. 
+    Fgetc is probably a safer and simpler way to process the stream.
+    
+6.  The parameters passed to load and check are declared using const because they are not allowed to change. This helps the program deal with these paramteres with optimum efficiency.

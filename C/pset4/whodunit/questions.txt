@@ -1,0 +1,12 @@
+1.  stdint.h je header fajl koji sadrzi setove typedef-ova koji specificiraju tacnu sirinu tipova integera, ukljucujuci i definisane najmanje i najvece vrednosti za svaki tipa koriscenjem makroa.
+2.  Mozemo da zauzmemo tacno onoliko prostora koliko nam treba u fajlu, sto omogucava da headeri od slika ne zauzmaju nepotreban prostor
+3.  BYTE koristi 8 bitova, tj 1 bajt // DWORD koristi 32 bita, tj 4 bajta // LONG koristi 32 signed bita, tj 4 bajta // WORD koristi 16 bitova , tj 2 bajta
+4.  Heksadecimalno 0x424D , ASCII : BM , ove vrednosti su sacuvane u bfType
+5.  bfSize je ukupan broj bajtova u celom fajlu, dok je biSize ukupan broj bajtova u info headeru (40 bajtova za bmp slike)
+6.  Ukoliko je biHeight negativan, slika je top-down
+7.  Polje biBitCount
+8.  Ako iz nekog razloga ne uspe da otvori trazeni fajl , vratice NULL (npr. ne moze da nadje fajl, ili je vec zakljucan od strane drugog procesa,..)
+9.  Zato sto po zvanicnoj dokumentaciji on radi sledece: nmemb − This is the number of elements, each one with a size of size bytes , kako mi uvek citamo struct , treba nam samo 1 element
+10. Padding bi bio 3, racunica : 3 pixela * 3 bajta po pixelu * 3 padding = 12
+11. Setuje poziciju fajla od odredjenog streama na odredjeni offset (koristi konstante SEEK_SET SEEK_CUR SEEK_END , returnuje 0 ako je uspesno, u suprotnom neku ne nula vrednost)
+12. SEEK_CUR je zapravo samo int konstanta, koristi se u fseek/fseeko funkcijama

@@ -1,0 +1,4 @@
+0. Kako su konstante DIM_MIN 3 i DIM_MAX 9 definisane, znaci da postoji i 3x3,5x5,6x6,7x7,8x8,9x9, pored 4x4
+1. Tabla je prikazana u Multidimenzionalnom nizu, odnosno Matrici (eng. Matrix), drugi popularan naziv je 2D array(niz)
+2. Poziva se funkcija greet, koja zatim poziva printf kako bi na stdout-u ispisala "WELCOME TO GAME OF FIFTEEN\n"
+3. init(),draw(),move(),won()
