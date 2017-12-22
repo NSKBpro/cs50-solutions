@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Portfolio
+{% endblock %}
+
+{% block main %}
+    <div class="container">
+    	<div class="row">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                  <thead>
+                    <tr>
+                      <th>Symbol</th>
+                      <th>Name</th>
+                      <th>Shares</th>
+                      <th>Price</th>
+                      <th>TOTAL</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for row in tableRows %}  
+                    <tr>
+                      <td class="symbol">{{row.symbol}}</td>
+                      <td>{{row.name}}</td>
+                      <td class="share">{{row.shares}}</td>
+                      <td class="price">{{row.price}}</td>
+                      <td class="total">{{row.total}}</td>
+                      <td><button class='btn btn-success buymore'>Buy one</button>/<button class='btn btn-warning sellmore'">Sell one</button></td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <td colspan=4></td>
+                        <td id="sum">{{total}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+            </div>
+    	</div>
+    </div>
+    <div id="loader" class=".center"><img src="/static/loader.gif"></img></div>
+    <script type="text/javascript" src="/static/js/index.js"></script>
+{% endblock %}
+

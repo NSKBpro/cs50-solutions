@@ -1,0 +1,38 @@
+#!/usr/bin/env python3
+
+import os
+import sys
+
+from analyzer import Analyzer
+from tweetstore import TweetsStore
+from termcolor import colored
+
+def main():
+
+    #Ensure proper usage
+    if len(sys.argv) != 2:
+        sys.exit("Usage: ./tweets @username")
+
+    #Absolute paths to lists
+    positives = os.path.join(sys.path[0], "positive-words.txt")
+    negatives = os.path.join(sys.path[0], "negative-words.txt")
+    
+    #Instantiate tweet store, analyze method is used from TweetsStore's super class (Analyzer)
+    tweetStore = TweetsStore(sys.argv[1],positives,negatives)
+    
+    #Loop through every tweet
+    for tweet in tweetStore.getTweets():
+        #Analyze tweet
+        score = tweetStore.analyze(tweet)
+        #Prepare output
+        output= str(score) + " " + tweet
+        if score > 0.0:
+            print(colored(output, "green"))
+        elif score < 0.0:
+            print(colored(output, "red"))
+        else:
+            print(colored(output, "yellow"))
+
+if __name__ == "__main__":
+    main()
+
